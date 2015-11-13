@@ -48,7 +48,7 @@ module Scan
                                      short_option: "-o",
                                      env_name: "SCAN_OUTPUT_DIRECTORY",
                                      description: "The directory in which all reports will be stored",
-                                     default_value: "./test_output"),
+                                     default_value: "./fastlane/test_output"),
         FastlaneCore::ConfigItem.new(key: :output_style,
                                      short_option: "-b",
                                      env_name: "SCAN_OUTPUT_STYLE",
