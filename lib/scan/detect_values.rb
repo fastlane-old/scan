@@ -29,7 +29,9 @@ module Scan
       if config[:device] # make sure it actually exists
         device = config[:device].to_s.strip.tr('()', '') # Remove parenthesis
 
-        found = FastlaneCore::Simulator.all.find { |d| (d.name + " " + d.ios_version).include? device }
+        found = FastlaneCore::Simulator.all.find do |d|
+          (d.name + " " + d.ios_version).include? device
+        end
 
         if found
           Scan.device = found
@@ -63,7 +65,9 @@ module Scan
       if config[:device] # make sure it actually exists
         device = config[:device].to_s.strip.tr('()', '') # Remove parenthesis
 
-        found = FastlaneCore::Simulator.all(requested_os_type: 'tvOS').find { |d| (d.name + " " + d.tvos_version).include? device }
+        found = FastlaneCore::SimulatorTV.all.find do |d|
+          (d.name + " " + d.tvos_version).include? device
+        end
 
         if found
           Scan.device = found
@@ -73,7 +77,7 @@ module Scan
         end
       end
 
-      sims = FastlaneCore::Simulator.all(requested_os_type: 'tvOS')
+      sims = FastlaneCore::SimulatorTV.all
       xcode_target = Scan.project.build_settings(key: "TVOS_DEPLOYMENT_TARGET")
 
       # Filter out any simulators that are not the same major version of our deployment target
