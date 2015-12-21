@@ -125,7 +125,12 @@ module Scan
         FastlaneCore::ConfigItem.new(key: :slack_only_on_failure,
                                     description: "Only post on Slack if the tests fail",
                                     is_string: false,
-                                    default_value: false)
+                                    default_value: false),
+        FastlaneCore::ConfigItem.new(key: :omit_exception_on_failing_tests,
+                                    description: "Don't throw an exception if any test fails",
+                                    default_value: false,
+                                    optional: true,
+                                    is_string: false)
       ]
     end
   end
