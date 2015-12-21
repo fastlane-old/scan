@@ -66,7 +66,7 @@ module Scan
 
       ReportCollector.new.parse_raw_file(TestCommandGenerator.xcodebuild_log_path)
 
-      raise "Tests failed" unless result[:failures] == 0
+      raise "Tests failed" unless result[:failures] == 0 || Scan.config[:omit_exception_on_failing_tests]
     end
   end
 end
