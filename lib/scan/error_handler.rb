@@ -21,7 +21,9 @@ module Scan
           print "For more information visit this stackoverflow answer:"
           print "https://stackoverflow.com/a/17031697/445598"
         when /Testing failed/
-          raise "Error building the application - see the log above".red
+          UI.user_error!("Error building the application - see the log above")
+        when /Executed 0 tests/
+          UI.user_error!("Failed running tests, see log above")
         when /Executed/
           # this is *really* important:
           # we don't want to raise an exception here
@@ -29,7 +31,7 @@ module Scan
           # after parsing the actual test results
           return
         end
-        raise "Error building/testing the application - see the log above".red
+        UI.user_error!("Error building/testing the application - see the log above")
       end
 
       private
